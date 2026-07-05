@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.S.T.S. - Adaptive Sparse Topology Synthesis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <header class="header">
+      <h1>⚡ A.S.T.S. Terminal</h1>
+      <p class="subtitle">Adaptive Sparse Topology Synthesis - In-Browser LLM Inference</p>
+    </header>
+
+    <!-- STATUS PANEL -->
+    <section class="panel status-panel">
+      <h2>System Status</h2>
+      <div class="grid-2">
+        <div class="stat">
+          <label>Hardware Target</label>
+          <span id="hardwareTarget" class="value">Detecting...</span>
+        </div>
+        <div class="stat">
+          <label>Memory Available</label>
+          <span id="memoryAvailable" class="value">-</span>
+        </div>
+        <div class="stat">
+          <label>Buffer Status</label>
+          <span id="bufferStatus" class="value">Idle</span>
+        </div>
+        <div class="stat">
+          <label>Streaming Mode</label>
+          <span id="streamingMode" class="value">-</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL SELECTOR -->
+    <section class="panel model-panel">
+      <h2>Model Selection</h2>
+      <div class="form-group">
+        <label for="modelSelect">Select Model:</label>
+        <select id="modelSelect">
+          <option value="">-- Choose a model --</option>
+          <option value="meta-llama/Llama-2-7b-hf">Llama 2 7B</option>
+          <option value="mistralai/Mistral-7B-v0.1">Mistral 7B</option>
+          <option value="gpt2">GPT-2 (small)</option>
+        </select>
+      </div>
+      <button id="loadModelBtn" class="btn btn-primary">Load Model</button>
+      <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <p id="loadingText">Loading...</p>
+      </div>
+    </section>
+
+    <!-- INFERENCE PANEL -->
+    <section class="panel inference-panel">
+      <h2>Inference</h2>
+      <div class="form-group">
+        <label for="promptInput">Prompt:</label>
+        <textarea id="promptInput" rows="4" placeholder="Enter your prompt here..."></textarea>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="maxTokens">Max Tokens:</label>
+          <input type="number" id="maxTokens" value="128" min="1" max="2048">
+        </div>
+        <div class="form-group">
+          <label for="temperature">Temperature:</label>
+          <input type="number" id="temperature" value="0.7" min="0" max="2" step="0.1">
+        </div>
+      </div>
+      <button id="generateBtn" class="btn btn-primary" disabled>Generate</button>
+    </section>
+
+    <!-- OUTPUT PANEL -->
+    <section class="panel output-panel">
+      <h2>Output</h2>
+      <div id="outputText" class="output-text">Output will appear here...</div>
+    </section>
+
+    <!-- TELEMETRY PANEL -->
+    <section class="panel telemetry-panel">
+      <h2>Real-Time Telemetry</h2>
+      <div class="grid-3">
+        <div class="metric">
+          <label>Tokens/sec</label>
+          <span id="tokensPerSec" class="value">0</span>
+        </div>
+        <div class="metric">
+          <label>GPU Utilization</label>
+          <span id="gpuUtil" class="value">0%</span>
+        </div>
+        <div class="metric">
+          <label>Memory Usage</label>
+          <span id="memoryUsage" class="value">0 MB</span>
+        </div>
+        <div class="metric">
+          <label>Prefill Time</label>
+          <span id="prefillTime" class="value">0 ms</span>
+        </div>
+        <div class="metric">
+          <label>Decode Time</label>
+          <span id="decodeTime" class="value">0 ms</span>
+        </div>
+        <div class="metric">
+          <label>SoC Temp</label>
+          <span id="socTemp" class="value">-</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGS PANEL -->
+    <section class="panel logs-panel">
+      <h2>System Logs</h2>
+      <div id="logOutput" class="log-output"></div>
+      <button id="clearLogsBtn" class="btn btn-secondary">Clear Logs</button>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
